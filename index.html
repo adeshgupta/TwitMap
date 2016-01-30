@@ -28,12 +28,19 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <style type="text/css">
+      li{
+        text-overflow:ellipsis;
+        overflow: hidden;
+      }
+    </style>
+
 </head>
 
 <body onload="initialize()">
     <div id="wrapper">
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
+        <div id="sidebar-wrapper" style="float:left;">
             <br>
             <div class="row" style="padding:10px;">
                 <div class="col-lg-11">
@@ -70,6 +77,15 @@
                 <li>
                     <a href="#" id="trend7">Contact</a>
                 </li>
+                 <li>
+                    <a href="#" id="trend8">Services</a>
+                </li>
+                <li>
+                    <a href="#" id="trend9">Contact</a>
+                </li>
+                 <li>
+                    <a href="#" id="trend10">Services</a>
+                </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -77,11 +93,10 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
+                <div id="map_canvas" style="border:solid;height:500px;"></div>
                 <div class="row">
                     <div class="col-lg-12">
                         
-
-
                         <a href="#menu-toggle" style="opacity:0.6;" class="btn btn-default" id="menu-toggle"><span id="toggle-dir" class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
                         <div class="btn-group">
                                <button id="query_btn" type="button" class="btn btn-default">Query Server</button> 
@@ -107,12 +122,12 @@
            
     $("#query_btn").click(function(){
        
-        $.get("http://twitmap-1206.appspot.com/",function(data){
+        $.get("http://twitmap-1206.appspot.com/gettrends",function(data){
             returned_data=data;
             alert("Received msg:"+data["payload"]);
 
-            for(j = 0; j < 7; j++){
-                document.getElementById("trend"+(j+1)).innerHTML=data[(j+1)];
+            for(j = 0; j < 10; j++){
+                document.getElementById("trend"+(j+1)).innerHTML=data["payload"][j];
             }
             //alert(data);
         });
@@ -137,7 +152,7 @@
         }
     });
 
-
+//function to display the map onload of body
     function initialize() {
         alert("To see the title of a marker, hover over the marker but don't click.");
         var myLatlng = new google.maps.LatLng(37.39361,-122.099263)
