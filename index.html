@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>TwitMap | Find what is Trending</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+     <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js"></script>
+    <!-- Map -->
+    <link href="https://google-developers.appspot.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body onload="initialize()">
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <br>
+            <div class="row" style="padding:10px;">
+                <div class="col-lg-11">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Tweet..">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Go</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="sidebar-nav">
+                <br><br><br><br>
+              
+                <li>
+                    <a href="#" id="trend1">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#" id="trend2">Shortcuts</a>
+                </li>
+                <li>
+                    <a href="#" id="trend3">Overview</a>
+                </li>
+                <li>
+                    <a href="#" id="trend4">Events</a>
+                </li>
+                <li>
+                    <a href="#" id="trend5">About</a>
+                </li>
+                <li>
+                    <a href="#" id="trend6">Services</a>
+                </li>
+                <li>
+                    <a href="#" id="trend7">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        
+
+
+                        <a href="#menu-toggle" style="opacity:0.6;" class="btn btn-default" id="menu-toggle"><span id="toggle-dir" class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+                        <div class="btn-group">
+                               <button id="query_btn" type="button" class="btn btn-default">Query Server</button> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- Menu Toggle Script -->
+    <!-- Code for querying the server --> 
+    <script>
+           
+    $("#query_btn").click(function(){
+       
+        $.get("http://twitmap-1206.appspot.com/",function(data){
+            returned_data=data;
+            alert("Received msg:"+data["payload"]);
+
+            for(j = 0; j < 7; j++){
+                document.getElementById("trend"+(j+1)).innerHTML=data[(j+1)];
+            }
+            //alert(data);
+        });
+
+    });
+
+
+    $("#menu-toggle").click(function(e) {
+
+        e.preventDefault();
+      
+        $("#wrapper").toggleClass("toggled");
+          var direction=document.getElementById("toggle-dir");
+        var toggle_dir=document.getElementById("toggle-dir").getAttribute("class");
+       
+        if(toggle_dir.match("glyphicon glyphicon-menu-left")){
+                        
+                        direction.setAttribute("class","glyphicon glyphicon-menu-right");
+        }
+        else{
+            direction.setAttribute("class","glyphicon glyphicon-menu-left");
+        }
+    });
+
+
+    function initialize() {
+        alert("To see the title of a marker, hover over the marker but don't click.");
+        var myLatlng = new google.maps.LatLng(37.39361,-122.099263)
+        var mapOptions = {
+          zoom: 3,
+          center: myLatlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+    }
+    </script>
+
+</body>
+
+</html>
