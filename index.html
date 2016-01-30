@@ -115,7 +115,14 @@
     <script src="js/bootstrap.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <!-- Menu Toggle Script -->
-    <!-- Code for querying the server --> 
+    
+    <!--heat map library-->
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZ99mgYKc59pZ7_37j9XsFro55yR7e5ww&libraries=visualization">
+    </script>
+    
+    
+    <!-- Code for querying the server -->
     <script>
     function initial_trends(){
   //  $("#query_btn").click(function(){
@@ -150,7 +157,38 @@
         }
     });
 
+
 //function to display the map onload of body
+
+    function heatMapRender(map){
+        
+        var points = [
+            new google.maps.LatLng(37.782, -122.447),
+            new google.maps.LatLng(37.782, -122.445),
+            new google.maps.LatLng(37.782, -122.443),
+            new google.maps.LatLng(37.782, -122.441),
+            new google.maps.LatLng(37.782, -122.439),
+            new google.maps.LatLng(37.782, -122.437),
+            new google.maps.LatLng(37.782, -122.435),
+            new google.maps.LatLng(37.785, -122.447),
+            new google.maps.LatLng(37.785, -122.445),
+            new google.maps.LatLng(37.785, -122.443),
+            new google.maps.LatLng(37.785, -122.441),
+            new google.maps.LatLng(37.785, -122.439),
+            new google.maps.LatLng(37.785, -122.437),
+            new google.maps.LatLng(37.785, -122.435)
+        ];
+        
+        
+        heatMap = new google.maps.visualization.HeatmapLayer({data: points, map: map});
+        
+        heatMap.setMap(map);
+        
+        
+        
+    }
+
+
     function initialize() {
        // alert("To see the title of a marker, hover over the marker but don't click.");
         var myLatlng = new google.maps.LatLng(37.39361,-122.099263)
@@ -160,8 +198,16 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
         initial_trends();
+
+        heatMapRender(map);
+
     }
+        
+        
+        
+        
     </script>
 
 </body>
