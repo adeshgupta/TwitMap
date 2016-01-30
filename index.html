@@ -57,34 +57,34 @@
                 <br><br><br><br>
               
                 <li>
-                    <a href="#" id="trend1">Dashboard</a>
+                    <a href="#" id="trend1"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend2">Shortcuts</a>
+                    <a href="#" id="trend2"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend3">Overview</a>
+                    <a href="#" id="trend3"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend4">Events</a>
+                    <a href="#" id="trend4"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend5">About</a>
+                    <a href="#" id="trend5"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend6">Services</a>
+                    <a href="#" id="trend6"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend7">Contact</a>
+                    <a href="#" id="trend7"></a>
                 </li>
                  <li>
-                    <a href="#" id="trend8">Services</a>
+                    <a href="#" id="trend8"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend9">Contact</a>
+                    <a href="#" id="trend9"></a>
                 </li>
                  <li>
-                    <a href="#" id="trend10">Services</a>
+                    <a href="#" id="trend10"></a>
                 </li>
             </ul>
         </div>
@@ -98,9 +98,7 @@
                     <div class="col-lg-12">
                         
                         <a href="#menu-toggle" style="opacity:0.6;" class="btn btn-default" id="menu-toggle"><span id="toggle-dir" class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
-                        <div class="btn-group">
-                               <button id="query_btn" type="button" class="btn btn-default">Query Server</button> 
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -119,12 +117,12 @@
     <!-- Menu Toggle Script -->
     <!-- Code for querying the server --> 
     <script>
-           
-    $("#query_btn").click(function(){
+    function initial_trends(){
+  //  $("#query_btn").click(function(){
        
         $.get("http://twitmap-1206.appspot.com/gettrends",function(data){
             returned_data=data;
-            alert("Received msg:"+data["payload"]);
+            //alert("Received msg:"+data["payload"]);
 
             for(j = 0; j < 10; j++){
                 document.getElementById("trend"+(j+1)).innerHTML=data["payload"][j];
@@ -132,8 +130,8 @@
             //alert(data);
         });
 
-    });
-
+    //});
+    }
 
     $("#menu-toggle").click(function(e) {
 
@@ -154,7 +152,7 @@
 
 //function to display the map onload of body
     function initialize() {
-        alert("To see the title of a marker, hover over the marker but don't click.");
+       // alert("To see the title of a marker, hover over the marker but don't click.");
         var myLatlng = new google.maps.LatLng(37.39361,-122.099263)
         var mapOptions = {
           zoom: 3,
@@ -162,6 +160,7 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+        initial_trends();
     }
     </script>
 
