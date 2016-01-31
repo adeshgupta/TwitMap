@@ -158,11 +158,12 @@
     });
 
 
+
     //function to query on cick of a tweet
     function send_trend_query(id1){
-        //alert("you clicked"+id1.id);
-        $.get("http://twitmap-1206.appspot.com/test",{trend:id1},function(data){           
-            
+       alert("you clicked"+id1);
+        $.get("http://2.twitmap-1206.appspot.com/getlocations",{search:id1},function(data){           
+            console.log("inside this get");
             alert("Received msg:"+data["payload"]);
             
         });
