@@ -3,7 +3,9 @@ import tweepy
 import webapp2,json
 from datetime import datetime
 from geopy.geocoders import *
+from google.appengine.api import urlfetch
 
+urlfetch.set_default_fetch_deadline(60)
 def min(a,b):
 	if(a>b):
 		return b
@@ -54,6 +56,8 @@ class test(webapp2.RequestHandler):
 
 class getLocations(webapp2.RequestHandler):
     def get(self):
+		self.response.headers.add_header("Access-Control-Allow-Origin", "*")
+		self.response.headers['Content-Type'] = 'application/json'
 		consumer_key = 'cOcBP9hHAUAXGKuQkG0SfMmFD'
 		consumer_secret = 'I1kjRf6EgyeqStRU0iLZD8DW1bx2MGE0BQNZaDbFJHJI5zg52n'
 		access_token = '1710334225-gg7M3WtPXLPm0BSde56MaTJyBeO24CohfACUHkD'
@@ -63,7 +67,7 @@ class getLocations(webapp2.RequestHandler):
 		api = tweepy.API(auth)
 		last_id = -1
 		max_tweets=100
-		t=self.request.get('search')
+		t=str(self.request.get('search'))
 		l=[]
 		temp=[]
 		c=0
