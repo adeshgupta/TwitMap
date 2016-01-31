@@ -57,34 +57,34 @@
                 <br><br><br><br>
               
                 <li>
-                    <a href="#" id="trend1" onclick="send_trend_query(this.innerHTML);"></a>
+                    <a href="#" id="trend1" onclick="clearHeatMap(this.innerHTML);"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend2" onclick="send_trend_query(this.innerHTML);"></a>
+                    <a href="#" id="trend2" onclick="clearHeatMap(this.innerHTML);"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend3" onclick="send_trend_query(this.innerHTML);"></a>
+                    <a href="#" id="trend3" onclick="clearHeatMap(this.innerHTML);"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend4" onclick="send_trend_query(this.innerHTML);"></a>
+                    <a href="#" id="trend4" onclick="clearHeatMap(this.innerHTML);"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend5" onclick="send_trend_query(this.innerHTML);"></a>
+                    <a href="#" id="trend5" onclick="clearHeatMap(this.innerHTML);"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend6" onclick="send_trend_query(this.innerHTML);"></a>
+                    <a href="#" id="trend6" onclick="clearHeatMap(this.innerHTML);"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend7" onclick="send_trend_query(this.innerHTML);"></a>
+                    <a href="#" id="trend7" onclick="clearHeatMap(this.innerHTML);"></a>
                 </li>
                  <li>
-                    <a href="#" id="trend8" onclick="send_trend_query(this.innerHTML);"></a>
+                    <a href="#" id="trend8" onclick="clearHeatMap(this.innerHTML);"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend9" onclick="send_trend_query(this.innerHTML);"></a>
+                    <a href="#" id="trend9" onclick="clearHeatMap(this.innerHTML);"></a>
                 </li>
                  <li>
-                    <a href="#" id="trend10" onclick="send_trend_query(this.innerHTML);"></a>
+                    <a href="#" id="trend10" onclick="clearHeatMap(this.innerHTML);"></a>
                 </li>
             </ul>
         </div>
@@ -200,12 +200,13 @@
     function heatMapRender(map, dataPts){
         
         var points = [];
+        
         var j;
-        //alert("heatMAP" + dataPts['payload'].length);
+        //alert("heatMAP" + dataPts['payload'].length)
         
         for(j = 0; j < dataPts["payload"].length; j++){
             console.log(dataPts["payload"][j]["item"][0]);
-           points.push(new google.maps.LatLng(dataPts["payload"][j]["item"][0], dataPts["payload"][j]["item"][1]));
+            points.push(new google.maps.LatLng(dataPts["payload"][j]["item"][0], dataPts["payload"][j]["item"][1]));
             
         }
         
@@ -218,6 +219,13 @@
         heatMap.setMap(map);
         
         
+        
+    }
+        
+    function clearHeatMap(id1){
+        
+          heatMap.setMap(null);
+          send_trend_query(id1);
         
     }
 
