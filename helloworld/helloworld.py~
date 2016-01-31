@@ -63,7 +63,7 @@ class getLocations(webapp2.RequestHandler):
 		api = tweepy.API(auth)
 		last_id = -1
 		max_tweets=100
-		t=self.request.get('search')
+		t="Pakistan"
 		l=[]
 		temp=[]
 		c=0
@@ -72,7 +72,7 @@ class getLocations(webapp2.RequestHandler):
 		while c < max_tweets:
 			count = max_tweets - c
 			try:
-				s = api.search(q="India", count=count, max_id=str(last_id - 1))
+				s = api.search(q=t, count=count, max_id=str(last_id - 1))
 				if not s:
 					break
 				c+=len(s)
