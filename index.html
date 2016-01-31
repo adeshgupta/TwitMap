@@ -57,34 +57,34 @@
                 <br><br><br><br>
               
                 <li>
-                    <a href="#" id="trend1"></a>
+                    <a href="#" id="trend1" onclick="send_trend_query(this.innerHTML);"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend2"></a>
+                    <a href="#" id="trend2" onclick="send_trend_query(this.innerHTML);"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend3"></a>
+                    <a href="#" id="trend3" onclick="send_trend_query(this.innerHTML);"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend4"></a>
+                    <a href="#" id="trend4" onclick="send_trend_query(this.innerHTML);"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend5"></a>
+                    <a href="#" id="trend5" onclick="send_trend_query(this.innerHTML);"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend6"></a>
+                    <a href="#" id="trend6" onclick="send_trend_query(this.innerHTML);"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend7"></a>
+                    <a href="#" id="trend7" onclick="send_trend_query(this.innerHTML);"></a>
                 </li>
                  <li>
-                    <a href="#" id="trend8"></a>
+                    <a href="#" id="trend8" onclick="send_trend_query(this.innerHTML);"></a>
                 </li>
                 <li>
-                    <a href="#" id="trend9"></a>
+                    <a href="#" id="trend9" onclick="send_trend_query(this.innerHTML);"></a>
                 </li>
                  <li>
-                    <a href="#" id="trend10"></a>
+                    <a href="#" id="trend10" onclick="send_trend_query(this.innerHTML);"></a>
                 </li>
             </ul>
         </div>
@@ -156,6 +156,19 @@
             direction.setAttribute("class","glyphicon glyphicon-menu-left");
         }
     });
+
+
+    //function to query on cick of a tweet
+    function send_trend_query(id1){
+        //alert("you clicked"+id1.id);
+        $.get("http://twitmap-1206.appspot.com/test",{trend:id1},function(data){           
+            
+            alert("Received msg:"+data["payload"]);
+            
+        });
+
+
+    }
 
 
 //function to display the map onload of body
