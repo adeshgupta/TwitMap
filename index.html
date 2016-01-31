@@ -101,6 +101,12 @@
                        
                     </div>
                 </div>
+
+                <div class="progress" id="blips">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                    <span class="sr-only"></span>
+                     </div>
+                </div>
             </div>
         </div>
         <!-- /#page-content-wrapper -->
@@ -164,22 +170,15 @@
 
     //function to query on cick of a tweet
     function send_trend_query(id1){
-        
+        document.getElementById("input-text").value=id1;
         $.get("http://2.twitmap-1206.appspot.com/getlocations",{search:id1},function(data){           
-<<<<<<< HEAD
-            console.log("inside this get");
-            alert("Received msg:"+data["payload"].length);
+
+          heatMapRender(map, data);
         });
     
-}
-=======
+        }       
+
             //console.log("inside this get");
-            heatMapRender(map, data);
-        });
-
-    }
->>>>>>> origin/master
-
         
 // choose the trend
     
@@ -233,32 +232,59 @@
     function initialize() {
        // alert("To see the title of a marker, hover over the marker but don't click.");
         var myLatlng = new google.maps.LatLng(37.39361,-122.099263)
+        document.getElementById("input-text").value="";
         var mapOptions = {
           zoom: 3,
           center: myLatlng,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-
-        
+        progressbar();
         initial_trends(map);
         
 
     }
         
-        
+
+        //function to search a query on click of GO
       function search_query(){
         var str=document.getElementById("input-text").value;
-        //alert(str);
+        alert(str);
          $.get("http://2.twitmap-1206.appspot.com/getlocations",{search:str},function(data){           
             console.log("inside this get");
             alert("Received msg:"+data["payload"].length);
+            heatMapRender(map, data);
         });
 
       }  
+
+
+      //function to progress bar timer animation
+      function progressbar() {
+        var timerId = 0;
+        var ctr=0;
+        var max=5;
+        
+        timerId = setInterval(function () {
+    // interval function
+    
+    $('#blips > .progress-bar').attr("style","width:" + ctr*max + "%");
+    ctr++;
+    // max reached?
+    if (ctr==max){
+      clearInterval(timerId);
+    }
+    
+  }, 1500);
+
+
+  /*$('.btn-default').click(function () {
+    clearInterval(timerId);
+  });*/
+
+    }
         
     </script>
-
 </body>
 
 </html>
