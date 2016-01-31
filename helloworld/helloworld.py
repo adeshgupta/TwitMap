@@ -65,7 +65,7 @@ class getLocations(webapp2.RequestHandler):
 		api = tweepy.API(auth)
 		last_id = -1
 		max_tweets=100
-		t="Pakistan"
+		t=str(self.request.get('search'))
 		l=[]
 		temp=[]
 		c=0
