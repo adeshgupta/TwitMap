@@ -196,6 +196,8 @@
         
         heatMap = new google.maps.visualization.HeatmapLayer({data: points, map: map});
         
+        heatMap.set('radius', 20);
+        
         heatMap.setMap(map);
         
         
