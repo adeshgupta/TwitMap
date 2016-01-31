@@ -164,7 +164,7 @@
 
     //function to query on cick of a tweet
     function send_trend_query(id1){
-       alert("you clicked"+id1);
+        
         $.get("http://2.twitmap-1206.appspot.com/getlocations",{search:id1},function(data){           
             //console.log("inside this get");
             heatMapRender(map, data);
@@ -179,6 +179,7 @@
         
         
         if(option == 0){
+          alert("Loading trends for: "+document.getElementById("trend1").innerHTML);    
           send_trend_query(document.getElementById("trend1").innerHTML);
         
         }
@@ -194,9 +195,9 @@
         var j;
         //alert("heatMAP" + dataPts['payload'].length);
         
-        for(j = 0; j < dataPts["payload"].len; j++){
-            
-           
+        for(j = 0; j < dataPts["payload"].length; j++){
+            console.log(dataPts["payload"][j]["item"][0]);
+           points.push(new google.maps.LatLng(dataPts["payload"][j]["item"][0], dataPts["payload"][j]["item"][1]));
             
         }
         
