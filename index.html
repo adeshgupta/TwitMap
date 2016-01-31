@@ -45,9 +45,9 @@
             <div class="row" style="padding:10px;">
                 <div class="col-lg-11">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Tweet..">
+                        <input id="input-text" type="text" class="form-control" placeholder="Tweet..">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go</button>
+                            <button class="btn btn-default" type="button" onclick="search_query()">Go</button>
                         </span>
                     </div>
                 </div>
@@ -164,12 +164,10 @@
        alert("you clicked"+id1);
         $.get("http://2.twitmap-1206.appspot.com/getlocations",{search:id1},function(data){           
             console.log("inside this get");
-            alert("Received msg:"+data["payload"]);
-            
+            alert("Received msg:"+data["payload"].length);
         });
-
-
-    }
+    
+}
 
 
 //function to display the map onload of body
@@ -220,7 +218,15 @@
     }
         
         
-        
+      function search_query(){
+        var str=document.getElementById("input-text").value;
+        //alert(str);
+         $.get("http://2.twitmap-1206.appspot.com/getlocations",{search:str},function(data){           
+            console.log("inside this get");
+            alert("Received msg:"+data["payload"].length);
+        });
+
+      }  
         
     </script>
 
