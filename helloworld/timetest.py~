@@ -10,15 +10,16 @@ access_token_secret = 'HCG0Mp9o9sBkbH4hdLod0vKY7kTyZzeGru2KSzz4OXBwj'
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
-s = api.search(q="hello", count=100)
 last_id = -1
-max_tweets=100
+max_tweets=1000
 l=[]
 temp=[]
 c=0
 i=0
 geolocator = Nominatim()
 while c < max_tweets:
+	if len(l)==40:
+		break
 	count = max_tweets - c
 	try:
 		s = api.search(q="India", count=count, max_id=str(last_id - 1))
@@ -31,11 +32,9 @@ while c < max_tweets:
 			if "coordinates" in y and y["coordinates"] is not None:
 				a={"type":1,"item":y["coordinates"]["coordinates"]}
 				l.append(a)
-			elif "location" in y["user"] and y["user"]["location"] not in temp:
-				temp.append(y["user"]["location"])
 	except tweepy.TweepError as e:
 		break
-
+'''
 for x in temp:
 	x=x.encode('utf-8')
 	location = geolocator.geocode(str(x))
@@ -43,7 +42,8 @@ for x in temp:
 		a=[location.latitude,location.longitude]
 		d={"type":2,"item":a}
 		l.append(d)
-
+'''
+print len(l)
 for x in l:
 	print type(x["item"])
 

@@ -3,7 +3,9 @@ import tweepy
 import webapp2,json
 from datetime import datetime
 from geopy.geocoders import *
+from google.appengine.api import urlfetch
 
+urlfetch.set_default_fetch_deadline(60)
 def min(a,b):
 	if(a>b):
 		return b
