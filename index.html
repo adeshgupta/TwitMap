@@ -171,6 +171,7 @@
     //function to query on cick of a tweet
     function send_trend_query(id1){
         document.getElementById("input-text").value=id1;
+                    document.getElementById("progress_bar").value = "0";
         $.get("http://2.twitmap-1206.appspot.com/getlocations",{search:id1},function(data){           
 
             document.getElementById("progress_bar").value = "100";
@@ -233,10 +234,10 @@
 
     function initialize() {
        // alert("To see the title of a marker, hover over the marker but don't click.");
-        var myLatlng = new google.maps.LatLng(37.39361,-122.099263)
+        var myLatlng = new google.maps.LatLng(34.5133,-23.1629)
         document.getElementById("input-text").value="";
         var mapOptions = {
-          zoom: 3,
+          zoom: 2,
           center: myLatlng,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
