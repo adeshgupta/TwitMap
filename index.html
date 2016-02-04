@@ -104,9 +104,12 @@
 
                 <div class="progress" id="blips">
                     <div id="progress_bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                    <span class="sr-only"></span>
+                    <!--<span class="sr-only"></span>-->
                      </div>
+                     
+
                 </div>
+                <p id="demo" style="text-align:center;margin-top:-10px;"></p>
             </div>
         </div>
         <!-- /#page-content-wrapper -->
@@ -276,6 +279,16 @@
                 $('#blips > .progress-bar').attr("style","width:" + ctr*max + "%");
         
                 ctr++;
+                if((ctr*max)<40){
+                       document.getElementById("demo").textContent="Fetching tweets..."; 
+                }   
+                if((ctr*max)>40 && (ctr*max)<70){
+                        document.getElementById("demo").textContent="Gathering Locations...";
+                }
+
+                if((ctr*max)>70 ){
+                        document.getElementById("demo").textContent="Rendering HeatMap...";
+                }
                 console.log(ctr);
                 /*
                 if (ctr==max){
