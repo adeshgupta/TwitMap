@@ -21,6 +21,10 @@
     <!-- Custom CSS -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
 
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico">
+    
+    <link rel="stylesheet" href="font-awesome-4.3.0/css/font-awesome.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -28,11 +32,22 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    
     <style type="text/css">
       li{
         text-overflow:ellipsis;
         overflow: hidden;
       }
+        
+        #fire{
+            
+            color: red;
+        }   
+        #pageheader{
+            
+            font-family: Helvetica Neue;
+            color: #55ACEE;
+        }
     </style>
 
 </head>
@@ -92,7 +107,9 @@
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
+
             <div class="container-fluid">
+                            <h1 id="pageheader">Tweet<i>Heat</i><i class="fa fa-fire" id="fire"></i></h1>
                 <div id="map_canvas" style="border:solid;height:500px;"></div>
                 <div class="row">
                     <div class="col-lg-12">
@@ -109,8 +126,19 @@
                      
 
                 </div>
+<<<<<<< HEAD
                 <p class="demo" id="demo" style="text-align:center;margin-top:-10px;"></p>
             </div>
+=======
+                <p id="demo" style="text-align:center;margin-top:-10px;"></p>
+                  	     <hr>
+      <!-- Site footer -->
+      <footer class="footer">
+        <p>&copy; 2016 Orchard Boys, view code on <a target="_blank" href="https://github.com/adeshgupta/TwitMap"><i class="fa fa-github-square fa-3x"></i></a> </p>
+        </footer>
+            </div>   
+
+>>>>>>> origin/master
         </div>
         <!-- /#page-content-wrapper -->
 
