@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>TwitMap | Find what is Trending</title>
+    <title>TweetHeat | Find what is Trending</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -109,7 +109,7 @@
                      
 
                 </div>
-                <p id="demo" style="text-align:center;margin-top:-10px;"></p>
+                <p class="demo" id="demo" style="text-align:center;margin-top:-10px;"></p>
             </div>
         </div>
         <!-- /#page-content-wrapper -->
@@ -133,15 +133,16 @@
     
     <!-- Code for querying the server -->
     <script>
-        
+        timerId=0;
     function initial_trends(map){
   //  $("#query_btn").click(function(){
-       
         $.get("http://2.twitmap-1206.appspot.com/gettrends",function(data){
             returned_data=data;
             //alert("Received msg:"+data["payload"]);
-
-            for(j = 0; j < 10; j++){
+            if(data["payload"].length==0){
+                window.location = "error.html";
+            }
+            for(j = 0; j < data["payload"].length; j++){
                 document.getElementById("trend"+(j+1)).innerHTML=data["payload"][j];
             }
             //alert(data);
@@ -173,12 +174,22 @@
 
     //function to query on cick of a tweet
     function send_trend_query(id1){
+        progressbar();
         document.getElementById("input-text").value=id1;
                     document.getElementById("progress_bar").value = "0";
         $.get("http://2.twitmap-1206.appspot.com/getlocations",{search:id1},function(data){           
-
-            document.getElementById("progress_bar").value = "100";
-            
+            if(data["payload"].length==0){
+                window.location="error.html";
+            }
+            //document.getElementById("progress_bar").value = "100";
+            max=500;
+            interval=50;
+            var timeout_id=setTimeout(function(){
+                $("#blips").hide();
+                $("#demo").hide();
+            },1000);
+           //clearInterval(timerId); 
+          // progressbar();
           heatMapRender(map, data);
         });
     
@@ -245,7 +256,7 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-        progressbar();
+        //progressbar();
         initial_trends(map);
         
 
@@ -268,11 +279,13 @@
 
 
       //function to progress bar timer animation
-      function progressbar() {
-        var timerId = 0;
+      function progressbar() { 
+        $("#blips").show();
+        $("#demo").show();
+        clearInterval(timerId);
         var ctr=0;
         max=2;
-        
+    interval=700;
         timerId = setInterval(function () {
     // interval function
     
@@ -286,8 +299,11 @@
                         document.getElementById("demo").textContent="Gathering Locations...";
                 }
 
-                if((ctr*max)>70 ){
+                if((ctr*max)>70 (ctr*max)<100 ){
                         document.getElementById("demo").textContent="Rendering HeatMap...";
+                }
+                if((ctr*max)>100){
+                    document.getElementById("demo").textContent="Rendered...";
                 }
                 console.log(ctr);
                 /*
@@ -296,7 +312,7 @@
                 }
                 */
     
-                }, 700);
+                }, interval);
 
         }
         
